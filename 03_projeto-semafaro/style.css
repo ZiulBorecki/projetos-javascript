@@ -13,12 +13,20 @@ main {
     gap: 5vh;
 }
 
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 .button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 90%;
     padding: 5px;
+    margin: 10px;
     font-size: 18px;
     margin-right: 10px;
     border-radius: 10px;
@@ -33,4 +41,9 @@ main {
 button:hover{
     background: rgb(114, 93, 235);
     color: rgb(255, 255, 255);
+}
+
+.buttons-left .buttons-right{
+    display: flex;
+    flex-direction: column;
 }
