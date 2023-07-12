@@ -14,7 +14,10 @@ main {
 }
 
 .button {
-    width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     padding: 5px;
     font-size: 18px;
     margin-right: 10px;
