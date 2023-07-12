@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5vh;
+}
+
+.button {
+    width: 110px;
+    padding: 5px;
+    font-size: 18px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    background: linear-gradient(to bottom right, #908a8a, #e9e6e6);
+    border-color: rgb(159, 159, 159);
+    font-family: 'Roboto';
+    color: rgb(37, 37, 37);
+    box-shadow: 0 2px 4px rgba(65, 41, 159, 0.2);
+}
+
+button:hover{
+    background: rgb(114, 93, 235);
+    color: rgb(255, 255, 255);
+}
