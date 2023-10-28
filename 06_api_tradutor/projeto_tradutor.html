@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API de Tradução</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2 class="text-center mb-4">Tradutor de Texto</h2>
+                <div class="form-group">
+                    <label for="texto">Texto a ser Traduzido:</label>
+                    <input type="text" class="form-control" id="texto">
+                </div>
+                <div class="form-group">
+                    <label for="opcao2">Idioma de Entrada:</label>
+                    <select class="form-control" id="opcao2">
+                        <option value="pt-br">Português (Brasil)</option>
+                        <option value="en">Inglês</option>
+                        <option value="es">Espanhol</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="opcao1">Idioma de Saída:</label>
+                    <select class="form-control" id="opcao1">
+                        <option value="pt-br">Português (Brasil)</option>
+                        <option value="en">Inglês</option>
+                        <option value="es">Espanhol</option>
+                    </select>
+                </div>
+                <button class="btn btn-info btn-block" onclick="busca()" id="botaoTraduzir" disabled>Traduzir</button>
+                <div class="mt-4">
+                    <h4>Resultado:</h4>
+                    <p id="resultado"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validaCampoTexto() {
+        var texto = document.getElementById("texto").value;
+        var botaoTraduzir = document.getElementById("botaoTraduzir");
+
+        // Verifica se o campo de texto está vazio
+        if (texto.trim() === "") {
+            botaoTraduzir.disabled = true; // Desativa o botão se estiver vazio
+        } else {
+            botaoTraduzir.disabled = false; // Ativa o botão se houver texto
+        }
+    }
+        document.getElementById("texto").addEventListener("input", validaCampoTexto);
+        
+        async function busca() {
+        // Obtém os valores dos campos de entrada
+        var texto = document.getElementById("texto").value;
+        var opcao1 = document.getElementById("opcao1").value;
+        var opcao2 = document.getElementById("opcao2").value;
+
+        const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
+        const options = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                'Accept-Encoding': 'application/gzip',
+                'X-RapidAPI-Key': '7d0accb7ddmsh2d9fb6b934a5849p1940c6jsn523b0eebca4e',
+                'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+            },
+            body: new URLSearchParams({
+                q: texto,
+                target: opcao1,
+                source: opcao2
+            })
+        };
+
+        const response = await fetch(url, options);
+        const result = await response.json();
+        document.getElementById("resultado").textContent = result.data.translations[0].translatedText;
+        }
+    </script>
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
